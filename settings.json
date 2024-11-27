@@ -7,6 +7,11 @@
 // custom settings, run `zed: open default settings` from the
 // command palette (cmd-shift-p / ctrl-shift-p)
 {
+  // "jupyter": {
+  //   "kernel_selections": {
+  //     "typescript": "oxc"
+  //   }
+  // },
   "assistant": {
     "default_model": {
       "provider": "zed.dev",
@@ -17,10 +22,11 @@
   "features": {
     "inline_completion_provider": "supermaven"
   },
-  "ui_font_size": 16,
+  "ui_font_size": 15,
   "buffer_font_size": 16,
   "ui_font_family": "Hack Nerd Font",
   "buffer_font_family": "Hack Nerd Font",
+  "buffer_line_height": "standard",
   "vim_mode": true,
   "tab_bar": {
     "show": true
@@ -73,7 +79,7 @@
         "enabled": true,
         "show_parameter_hints": false,
         "show_other_hints": true,
-        "show_type_hints": true
+        "show_type_hints": false
       }
     },
     "Python": {
@@ -115,31 +121,33 @@
     "**/.tap",
     "**/.nyc_output",
     "**/report",
-    "**/node_modules"
+    "**/node_modules",
+    "!**/.env",
+    "!**/.env.json"
   ],
   // Turn off telemetry
   "telemetry": {
     "diagnostics": false,
     "metrics": false
   },
-  // Move all panel to the right
+  // Move all panel to the left
   "project_panel": {
     "button": true,
-    "dock": "right",
+    "dock": "left",
     "git_status": true
   },
   "outline_panel": {
-    "dock": "left"
+    "dock": "right"
   },
   "collaboration_panel": {
-    "dock": "left"
+    "dock": "right"
   },
-  // Move some unnecessary panels to the left
+  // Move some unnecessary panels to the right
   "notification_panel": {
-    "dock": "left"
+    "dock": "right"
   },
   "chat_panel": {
-    "dock": "left"
+    "dock": "right"
   },
   "private_files": [],
   "vim": {
@@ -150,13 +158,13 @@
   },
   "theme": {
     "mode": "system",
-    "light": "One Light",
+    "light": "Catppuccin Latte",
     "dark": "Gruvbox Dark"
   },
   "ssh_connections": [
     {
       "host": "localhost",
-      "projects": [{ "paths": ["~/dev/sondage-sportall"] }]
+      "projects": [{ "paths": ["~/dev/sondage-sportall", "~/dev/sportall"] }]
     }
   ]
 }
