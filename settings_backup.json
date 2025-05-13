@@ -12,46 +12,39 @@
   //     "typescript": "oxc"
   //   }
   // },
-  "edit_predictions": {
-    "mode": "subtle",
-    "copilot": {
-      "proxy": null,
-      "proxy_no_verify": null
-    },
-    "enabled_in_assistant": false
-  },
   "assistant": {
     "default_model": {
-      "provider": "ollama",
-      "model": "hf.co/NousResearch/Hermes-3-Llama-3.1-8B-GGUF:Q5_K_M"
+      "provider": "zed.dev",
+      "model": "claude-3-5-sonnet-latest"
     },
     "version": "2"
   },
   "features": {
-    "edit_prediction_provider": "supermaven"
+    "inline_completion_provider": "supermaven"
   },
-  "vim_mode": true,
   "ui_font_size": 15,
-  "buffer_font_size": 15,
+  "buffer_font_size": 16,
   "ui_font_family": "Hack Nerd Font",
   "buffer_font_family": "Hack Nerd Font",
   "buffer_line_height": "standard",
-  // "format_on_save": "on",
-  "formatter": {
-    "code_actions": {
-      "source.fixAll.eslint": true
-    }
-    // "external": {
-    //   "command": "prettier",
-    //   "arguments": ["--stdin-filepath", "{buffer_path}"]
-    // }
+  "vim_mode": true,
+  "tab_bar": {
+    "show": true
+  },
+  "scrollbar": {
+    "show": "never"
+  },
+  // Indentation, rainbow indentation
+  "indent_guides": {
+    "enabled": true,
+    "coloring": "indent_aware"
   },
   // NOTE: Zen mode, refer https://github.com/zed-industries/zed/issues/4382 when it's resolved
   "centered_layout": {
     "left_padding": 0.15,
     "right_padding": 0.15
   },
-  "cursor_shape": "bar",
+  "cursor_shape": "hollow",
   // Uncomment below to use local AI with Ollama, refer https://zed.dev/docs/language-model-integration?highlight=ollama#using-ollama-on-macos
   // "assistant": {
   //   "default_model": {
@@ -88,58 +81,10 @@
         "show_other_hints": true,
         "show_type_hints": false
       }
-      // "code_actions_on_format": {
-      //   "source.fixAll.eslint": true,
-      //   "source.organizeImports": true
-      // }
-      // "language_overrides": {
-      //   "TypeScript": {
-      //     "format_on_save": {
-      //       "external": {
-      //         "command": "node_modules/.bin/prettier",
-      //         "arguments": ["--stdin-filepath", "{buffer_path}"]
-      //       }
-      //     }
-      //   },
-      //   "TSX": {
-      //     "format_on_save": {
-      //       "external": {
-      //         "command": "node_modules/.bin/prettier",
-      //         "arguments": ["--stdin-filepath", "{buffer_path}"]
-      //       }
-      //     }
-      //   }
-      // }
-      // "language_overrides": {
-      //   "TypeScript": {
-      //     "format_on_save": {
-      //       "external": {
-      //         "command": "prettier",
-      //         "arguments": ["--stdin-filepath", "{buffer_path}"]
-      //       }
-      //     }
-      //   },
-      //   "TSX": {
-      //     "format_on_save": {
-      //       "external": {
-      //         "command": "prettier",
-      //         "arguments": ["--stdin-filepath", "{buffer_path}"]
-      //       }
-      //     }
-      //   }
-      // }
     },
     "Python": {
-      "format_on_save": {
-        "language_server": {
-          "name": "ruff"
-        }
-      },
-      "formatter": {
-        "language_server": {
-          "name": "ruff"
-        }
-      },
+      "format_on_save": { "language_server": { "name": "ruff" } },
+      "formatter": { "language_server": { "name": "ruff" } },
       "language_servers": ["pyright", "ruff"]
     }
   },
@@ -166,7 +111,7 @@
     "**/.settings",
     // above is default from Zed
     "**/out",
-    // "**/dist",
+    "**/dist",
     "**/.husky",
     "**/.turbo",
     "**/.vscode-test",
@@ -219,11 +164,7 @@
   "ssh_connections": [
     {
       "host": "localhost",
-      "projects": [
-        {
-          "paths": ["~/dev/sondage-sportall", "~/dev/sportall"]
-        }
-      ]
+      "projects": [{ "paths": ["~/dev/sondage-sportall", "~/dev/sportall"] }]
     }
   ]
 }

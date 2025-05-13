@@ -19,14 +19,13 @@
       // "ctrl-y": "project_symbols::Toggle",
       "ctrl-/": "editor::ToggleComments",
       "ctrl-b": "project_panel::ToggleFocus",
-      "super-shift-b": "workspace::ToggleLeftDock",
       "ctrl-e": "project_panel::ToggleFocus",
-      "ctrl-t": null,
+      "ctrl-t": "terminal_panel::ToggleFocus",
       "alt-shift-a": "workspace::ToggleBottomDock",
       "ctrl-alt-w": "pane::CloseActiveItem",
-      "ctrl-a": "editor::AcceptEditPrediction",
+      "ctrl-a": "editor::AcceptInlineCompletion",
       "ctrl-shift-up": "workspace::ToggleZoom",
-      "ctrl-alt-shift-b": "git::Branch",
+      "ctrl-alt-shift-b": "branches::OpenRecent",
       "ctrl-alt-shift-o": "project_symbols::Toggle",
       "tab": null
     }
@@ -38,8 +37,8 @@
       "ctrl-b": "project_panel::ToggleFocus",
       "alt-shift-a": "workspace::ToggleBottomDock",
       "ctrl-alt-w": "pane::CloseActiveItem",
-      "ctrl-a": "editor::AcceptEditPrediction",
-      "ctrl-alt-shift-b": "git::Branch",
+      "ctrl-a": "editor::AcceptInlineCompletion",
+      "ctrl-alt-shift-b": "branches::OpenRecent",
       "ctrl-alt-shift-o": "project_symbols::Toggle",
       "tab": null
     }
@@ -60,8 +59,8 @@
     "bindings": {
       // put key-bindings here if you want them to work in normal & visual mode
       // Git
-      "space g h d": "editor::ToggleSelectedDiffHunks",
-      "space g h r": "git::Restore",
+      "space g h d": "editor::ToggleHunkDiff",
+      "space g h r": "editor::RevertSelectedHunks",
 
       // Toggle inlay hints
       "space t i": "editor::ToggleInlayHints",
@@ -88,12 +87,10 @@
 
       // Movements
       "ctrl-shift-alt-c": "editor::ScrollCursorCenter",
-      // "h": ["workspace::SendKeystrokes", "h ctrl-shift-alt-c"],
+      "h": ["workspace::SendKeystrokes", "h ctrl-shift-alt-c"],
       "j": ["workspace::SendKeystrokes", "j ctrl-shift-alt-c"],
       "k": ["workspace::SendKeystrokes", "k ctrl-shift-alt-c"],
-      // "l": ["workspace::SendKeystrokes", "l ctrl-shift-alt-c"],
-      "n": ["workspace::SendKeystrokes", "n ctrl-shift-alt-c"],
-      "N": ["workspace::SendKeystrokes", "N ctrl-shift-alt-c"],
+      "l": ["workspace::SendKeystrokes", "l ctrl-shift-alt-c"],
       "g g": ["workspace::SendKeystrokes", "g g ctrl-shift-alt-c"],
       "shift-g": ["workspace::SendKeystrokes", "shift-g ctrl-shift-alt-c"],
       "ctrl-d": ["workspace::SendKeystrokes", "ctrl-d ctrl-shift-alt-c"],
@@ -106,10 +103,10 @@
       // put key-bindings here if you want them to work only in normal mode
       // Window movement bindings
       // Ctrl jklk to move between panes
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-j": "workspace::ActivatePaneDown",
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
 
       // +LSP
       "space c a": "editor::ToggleCodeActions",
@@ -124,10 +121,10 @@
       "g T": "editor::GoToTypeDefinitionSplit",
       "g r": "editor::FindAllReferences",
       "] d": "editor::GoToDiagnostic",
-      "[ d": "editor::GoToPreviousDiagnostic",
+      "[ d": "editor::GoToPrevDiagnostic",
       // TODO: Go to next/prev error
       "] e": "editor::GoToDiagnostic",
-      "[ e": "editor::GoToPreviousDiagnostic",
+      "[ e": "editor::GoToPrevDiagnostic",
       // Symbol search
       "s s": "outline::Toggle",
       "s S": "project_symbols::Toggle",
@@ -137,13 +134,13 @@
       // +Git
       // Git prev/next hunk
       "] h": "editor::GoToHunk",
-      "[ h": "editor::GoToPreviousHunk",
+      "[ h": "editor::GoToPrevHunk",
 
       // TODO: git diff is not ready yet, refer https://github.com/zed-industries/zed/issues/8665#issuecomment-2194000497
 
       // + Buffers
       // Switch between buffers
-      "shift-h": "pane::ActivatePreviousItem",
+      "shift-h": "pane::ActivatePrevItem",
       "shift-l": "pane::ActivateNextItem",
       // Close active panel
       "shift-q": "pane::CloseActiveItem",
@@ -189,7 +186,7 @@
       // visual, visual line & visual block modes
       "g c": "editor::ToggleComments",
       "tab": "editor::Tab",
-      "shift-tab": "editor::Backtab"
+      "shift-tab": "editor::TabPrev"
     }
   },
   // Better escape
@@ -197,9 +194,8 @@
     "context": "Editor && vim_mode == insert && !menu",
     "bindings": {
       "tab": "editor::Tab",
-      "shift-tab": "editor::Backtab",
+      "shift-tab": "editor::TabPrev",
 
-      "ctrl-s": "workspace::Save",
       "alt-o": "editor::NewlineBelow",
       "alt-shift-o": "editor::NewlineAbove",
       "alt-p": "editor::Paste",
@@ -237,20 +233,10 @@
   {
     "context": "Terminal",
     "bindings": {
-      "ctrl-shift-n": "workspace::NewTerminal",
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-j": "workspace::ActivatePaneDown"
-    }
-  },
-  {
-    "context": "GitPanel",
-    "bindings": {
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-j": "workspace::ActivatePaneDown"
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
     }
   },
   // File panel (netrw)
@@ -268,20 +254,20 @@
       "q": "workspace::ToggleRightDock",
       "space e": "workspace::ToggleRightDock",
       // Navigate between panel
-      "ctrl-h": "workspace::ActivatePaneLeft",
-      "ctrl-l": "workspace::ActivatePaneRight",
-      "ctrl-k": "workspace::ActivatePaneUp",
-      "ctrl-j": "workspace::ActivatePaneDown"
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"]
     }
   },
   // Panel nagivation
   {
     "context": "Dock",
     "bindings": {
-      "ctrl-w h": "workspace::ActivatePaneLeft",
-      "ctrl-w l": "workspace::ActivatePaneRight",
-      "ctrl-w k": "workspace::ActivatePaneUp",
-      "ctrl-w j": "workspace::ActivatePaneDown"
+      "ctrl-w h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-w l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-w k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-w j": ["workspace::ActivatePaneInDirection", "Down"]
     }
   },
   {
@@ -289,13 +275,6 @@
     "bindings": {
       // Map VSCode like keybindings
       "cmd-b": "workspace::ToggleRightDock"
-    }
-  },
-  {
-    "context": "Pane",
-    "bindings": {
-      "ctrl-shift-left": "pane::ActivatePreviousItem",
-      "ctrl-shift-right": "pane::ActivateNextItem"
     }
   },
   // Run nearest task
